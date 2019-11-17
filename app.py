@@ -1,21 +1,39 @@
 import time
 import task
+import pickle
+
+def save():
+    with open("tasks_database.db", "wb") as f:
+        pickle.dump(task.tasks, f)
+
+def load():
+    try:
+        with open("tasks_database.db", "rb") as f:
+            task.tasks = pickle.load(f)
+    except:
+        return
 
 def add_task(name, description):
     task.Task(name, description)
+    save()
 
 def remove_task(id):    
     for task_ in task.tasks:
         if task_.id == id:
             task_.remove()
 
+    save()
+
 def one():
     print("\n", "-"*50)
 
     print("\nTasks:\n")
 
-    for task_ in task.tasks:
-        print("{}) Name: {}, Description: {}".format(task_.id, task_.name, task_.description))
+    if task.tasks:
+        for task_ in task.tasks:
+            print("{}) Name: {}, Description: {}".format(task_.id, task_.name, task_.description))
+    else:
+        print("No Current Tasks")
 
     print("\n", "-"*20)
     print("1) Remove Task")
@@ -46,12 +64,9 @@ def two():
 
     time.sleep(5)
 
-print("Todo List:\n")
+load()
 
-add_task("####", "########")
-add_task("dwalkdmwa", "ndwkjadnwajknda")
-add_task("156165156 156 1561", "26561651")
-add_task("@##!#@!$!#", "@#!&*(#!&(*@))")
+print("Todo List:\n")
 
 while True:
     print("_"*20)

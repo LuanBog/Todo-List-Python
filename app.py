@@ -69,4 +69,4 @@ while True:
     elif menu_input == 3:
         break
 
-#TODO: Try creating a Task Class instead, Saving tasks to a database with pickle
+#TODO: Saving tasks to a database with pickle

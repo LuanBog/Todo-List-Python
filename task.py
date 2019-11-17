@@ -12,11 +12,11 @@ class Task:
         found = False
 
         for task in tasks:
-            if task["id"] == id:
+            if task.id == id:
                 found = True
                 continue
 
             if found:
-                task["id"] -= 1
+                task.id -= 1
 
         tasks.remove(self)

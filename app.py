@@ -1,35 +1,21 @@
 import time
-from task import *
-
-tasks = [] #Tasks Component: {Name, Description, ID}
+import task
 
 def add_task(name, description):
-    task = {"name": name, "description": description, "id": len(tasks) + 1}
-
-    tasks.append(task)
+    task.Task(name, description)
 
 def remove_task(id):    
-    task_to_remove = None
-    found = False
-
-    for task in tasks:
-        if task["id"] == id:
-            task_to_remove = task
-            found = True
-            continue
-
-        if found:
-            task["id"] -= 1
-
-    tasks.remove(task_to_remove)
+    for task_ in task.tasks:
+        if task_.id == id:
+            task_.remove()
 
 def one():
     print("\n", "-"*50)
 
     print("\nTasks:\n")
 
-    for task in tasks:
-        print("{}) Name: {}, Description: {}".format(task["id"], task["name"], task["description"]))
+    for task_ in task.tasks:
+        print("{}) Name: {}, Description: {}".format(task_.id, task_.name, task_.description))
 
     print("\n", "-"*20)
     print("1) Remove Task")
@@ -41,7 +27,7 @@ def one():
     if view_choice == 1:
         id_choice = int(input("\nNumber: "))
 
-        yn = input(f"\nAre you sure you want to delete {tasks[id_choice-1]['name']}?\n(y/n): ")
+        yn = input(f"\nAre you sure you want to delete {task.tasks[id_choice-1].name}?\n(y/n): ")
 
         if yn.lower() == "y" or yn.lower() == "yes":
             remove_task(id_choice)

@@ -74,6 +74,7 @@ def two():
     if not name or not description:
         print("You don't have an input on name/description, Please try again!")
         two()
+        return
 
     add_task(name, description)
 
